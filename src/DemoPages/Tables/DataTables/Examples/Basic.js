@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 import { Row, Col, Card, CardBody } from "reactstrap";
+import Loader from "react-loaders";
 
 import ReactTable from "react-table";
 import PageTitle from "../../../../Layout/AppMain/PageTitle";
@@ -56,7 +57,12 @@ export default class DataTableBasic extends React.Component {
   }
 
   render() {
-    const { data: dataProps, columns, mostrarTitulo = true } = this.props;
+    const {
+      data: dataProps,
+      columns,
+      mostrarTitulo = true,
+      loading = false,
+    } = this.props;
     const { data } = this.state;
 
     const renderData = dataProps ? dataProps : data;
@@ -85,12 +91,16 @@ export default class DataTableBasic extends React.Component {
             <Col md="12">
               <Card className="main-card mb-3">
                 <CardBody>
-                  <ReactTable
-                    data={renderData}
-                    columns={renderColumns}
-                    defaultPageSize={10}
-                    className="-striped -highlight"
-                  />
+                  {loading ? (
+                    <Loader type="ball-pulse" />
+                  ) : (
+                    <ReactTable
+                      data={renderData}
+                      columns={renderColumns}
+                      defaultPageSize={10}
+                      className="-striped -highlight"
+                    />
+                  )}
                 </CardBody>
               </Card>
             </Col>

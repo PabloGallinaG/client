@@ -21,7 +21,14 @@ const Empleados = ({ match }) => (
         <div className="app-main__inner">
           {/* Empleados Crud */}
           <Route path={`${match.url}/listado`} component={EmpleadosListado} />
-          <Route path={`${match.url}/crear`} component={EmpleadosCrearActualizar} />
+          <Route
+            path={`${match.url}/crear`}
+            component={EmpleadosCrearActualizar}
+          />
+          <Route
+            path={`${match.url}/:id/editar`}
+            component={EmpleadosCrearActualizar}
+          />
         </div>
         <AppFooter />
       </div>
