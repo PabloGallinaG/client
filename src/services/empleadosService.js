@@ -18,7 +18,7 @@ export const getEmpleadoById = async (id) => {
   try {
     const res = await axios.get(`http://localhost:3001/api/empleados/${id}`);
 
-    const { municipio, departamento, puesto } = res.data;
+    const { municipio, departamento } = res.data;
     const departamento_index = departamento - 1;
     const data_parse = {
       ...res.data,
@@ -26,7 +26,7 @@ export const getEmpleadoById = async (id) => {
         (_municipio) => _municipio.id === municipio
       ),
       departamento: departamentosOptions[departamento_index],
-      puestos: puesto ? JSON.parse(puesto) : puesto,
+      // puestos: puesto ? JSON.parse(puesto) : puesto,
     };
 
     console.log("data_parse", data_parse);
@@ -40,14 +40,14 @@ export const getEmpleadoById = async (id) => {
 
 // create categoriaProducto
 export const createEmpleado = async (data) => {
-  const { municipio, departamento, fecha_nacimiento, puestos: puesto } = data;
+  const { municipio, departamento, fecha_nacimiento, puestos } = data;
   try {
     const res = await axios.post("http://localhost:3001/api/empleados", {
       ...data,
       municipio: municipio.id,
       departamento: departamento.id,
       fecha_nacimiento: moment(fecha_nacimiento).format("YYYY-MM-DD"),
-      puesto: JSON.stringify(puesto),
+      puestos,
     });
     toast.success("Empleado creado");
     return res.data;
@@ -71,14 +71,14 @@ export const deleteEmpleado = async (id) => {
 
 // patch categoriaProducto
 export const updateEmpleado = async (id, data) => {
-  const { municipio, departamento, fecha_nacimiento, puestos: puesto } = data;
+  const { municipio, departamento, fecha_nacimiento, puestos } = data;
   try {
     const res = await axios.put(`http://localhost:3001/api/empleados/${id}`, {
       ...data,
       municipio: municipio.id,
       departamento: departamento.id,
       fecha_nacimiento: moment(fecha_nacimiento).format("YYYY-MM-DD"),
-      puesto: JSON.stringify(puesto),
+      puestos,
     });
     toast.success("Sucursal actualizada");
     return res.data;

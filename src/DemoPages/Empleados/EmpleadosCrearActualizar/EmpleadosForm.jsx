@@ -190,16 +190,6 @@ const EmpleadosForm = ({
                 placeholder="Salario"
                 type="number"
               />
-              {/* <InputSelectValidation
-                errors={errors}
-                touched={touched}
-                value={values.puestos}
-                key_name="puestos"
-                placeholder="Puestos"
-                handleChange={setFieldValue}
-                options={puestosOption}
-                isMulti
-              /> */}
 
               <InputAsyncSelectValidation
                 errors={errors}
