@@ -109,10 +109,12 @@ const EmpleadosListado = () => {
         confirmButtonText="Si, eliminar!"
         cancelButtonText="No, cancelar!"
         showCancelButton
-        onConfirm={() => {
-          deleteEmpleado(id_empleado);
+        onConfirm={async () => {
+          setLoading(true);
+          await deleteEmpleado(id_empleado);
           handleToggleAlert();
           getData();
+          setLoading(false);
         }}
         onCancel={() => handleToggleAlert()}
       />

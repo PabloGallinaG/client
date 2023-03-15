@@ -100,10 +100,12 @@ const PuestosListado = () => {
         confirmButtonText="Si, eliminar!"
         cancelButtonText="No, cancelar!"
         showCancelButton
-        onConfirm={() => {
-          deletePuesto(id_puesto);
+        onConfirm={async () => {
+          setLoading(true);
+          await deletePuesto(id_puesto);
           handleToggleAlert();
           getData();
+          setLoading(false);
         }}
         onCancel={() => handleToggleAlert()}
       />

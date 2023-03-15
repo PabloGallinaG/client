@@ -11,6 +11,7 @@ import {
   municipiosOptions,
   puestosOption,
 } from "../../../utils/constantes";
+import InputAsyncSelectValidation from "../../Components/InputValidation/InputAsyncSelectValidation";
 
 const SignupSchema = Yup.object().shape({
   primer_nombre: Yup.string().required("Este campo es requerido"),
@@ -189,7 +190,7 @@ const EmpleadosForm = ({
                 placeholder="Salario"
                 type="number"
               />
-              <InputSelectValidation
+              {/* <InputSelectValidation
                 errors={errors}
                 touched={touched}
                 value={values.puestos}
@@ -197,6 +198,17 @@ const EmpleadosForm = ({
                 placeholder="Puestos"
                 handleChange={setFieldValue}
                 options={puestosOption}
+                isMulti
+              /> */}
+
+              <InputAsyncSelectValidation
+                errors={errors}
+                touched={touched}
+                value={values.puestos}
+                key_name="puestos"
+                placeholder="Puestos"
+                handleChange={setFieldValue}
+                // options={puestosOption}
                 isMulti
               />
             </div>
