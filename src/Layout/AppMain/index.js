@@ -17,6 +17,7 @@ const Charts = lazy(() => import('../../DemoPages/Charts'));
 const Forms = lazy(() => import('../../DemoPages/Forms'));
 const Tables = lazy(() => import('../../DemoPages/Tables'));
 const Empleados = lazy(() => import('../../DemoPages/Empleados'));
+const Puestos = lazy(() => import('../../DemoPages/Puestos'));
 
 const AppMain = () => {
 
@@ -147,6 +148,22 @@ const AppMain = () => {
                 </div>
             }>
                 <Route path="/empleados" component={Empleados}/>
+            </Suspense>
+
+            <Suspense fallback={
+                <div className="loader-container">
+                    <div className="loader-container-inner">
+                        <div className="text-center">
+                            <Loader type="ball-pulse-sync"/>
+                        </div>
+                        <h6 className="mt-3">
+                            Please wait while we load all the Puestos Crud examples
+                            <small>Because this is a demonstration we load at once all the Dashboard Widgets examples. This wouldn't happen in a real live app!</small>
+                        </h6>
+                    </div>
+                </div>
+            }>
+                <Route path="/puestos" component={Puestos}/>
             </Suspense>
 
             {/* Pages */}

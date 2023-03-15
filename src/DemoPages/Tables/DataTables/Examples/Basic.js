@@ -92,7 +92,9 @@ export default class DataTableBasic extends React.Component {
               <Card className="main-card mb-3">
                 <CardBody>
                   {loading ? (
-                    <Loader type="ball-pulse" />
+                    <div className="d-flex justify-content-center align-items-center h-50">
+                      <Loader type="ball-pulse" />
+                    </div>
                   ) : (
                     <ReactTable
                       data={renderData}

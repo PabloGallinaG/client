@@ -45,6 +45,7 @@ const EmpleadosForm = ({
     salario: "",
     puestos: "",
   },
+  loading = false,
 }) => {
   // console.log("initialValues", initialValues);
   return (
@@ -200,7 +201,12 @@ const EmpleadosForm = ({
               />
             </div>
 
-            <Button className="mb-2 mr-2" color="primary" type="submit">
+            <Button
+              className="mb-2 mr-2"
+              color="primary"
+              type="submit"
+              disabled={loading}
+            >
               {isUpdate ? "Editar" : "Crear"} Empleado
             </Button>
           </Form>

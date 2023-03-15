@@ -450,3 +450,11 @@ export const EmpleadosNav = [
         to: '#/empleados/listado',
     },
 ];
+
+export const PuestosNav = [
+    {
+        icon: 'pe-7s-id',
+        label: 'Puestos Crud',
+        to: '#/puestos/listado',
+    },
+];

@@ -10,6 +10,7 @@ import {
   WidgetsNav,
   ChartsNav,
   EmpleadosNav,
+  PuestosNav,
 } from "./NavItems";
 
 class Nav extends Component {
@@ -24,19 +25,63 @@ class Nav extends Component {
     return (
       <Fragment>
         <h5 className="app-sidebar__heading">Menu</h5>
-                <MetisMenu content={MainNav} onSelected={this.toggleMobileSidebar} activeLinkFromLocation className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"/>
-                <h5 className="app-sidebar__heading">UI Components</h5>
-                <MetisMenu content={ComponentsNav}  onSelected={this.toggleMobileSidebar} activeLinkFromLocation className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"/>
-                <h5 className="app-sidebar__heading">Dashboard Widgets</h5>
-                <MetisMenu content={WidgetsNav}  onSelected={this.toggleMobileSidebar} activeLinkFromLocation className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"/>
-                <h5 className="app-sidebar__heading">Forms</h5>
-                <MetisMenu content={FormsNav}  onSelected={this.toggleMobileSidebar} activeLinkFromLocation className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"/>
-                <h5 className="app-sidebar__heading">Charts</h5>
-                <MetisMenu content={ChartsNav}  onSelected={this.toggleMobileSidebar} activeLinkFromLocation className="vertical-nav-menu" iconNamePrefix="" classNameStateIcon="pe-7s-angle-down"/>
+        {/* <MetisMenu
+          content={MainNav}
+          onSelected={this.toggleMobileSidebar}
+          activeLinkFromLocation
+          className="vertical-nav-menu"
+          iconNamePrefix=""
+          classNameStateIcon="pe-7s-angle-down"
+        />
+        <h5 className="app-sidebar__heading">UI Components</h5>
+        <MetisMenu
+          content={ComponentsNav}
+          onSelected={this.toggleMobileSidebar}
+          activeLinkFromLocation
+          className="vertical-nav-menu"
+          iconNamePrefix=""
+          classNameStateIcon="pe-7s-angle-down"
+        />
+        <h5 className="app-sidebar__heading">Dashboard Widgets</h5>
+        <MetisMenu
+          content={WidgetsNav}
+          onSelected={this.toggleMobileSidebar}
+          activeLinkFromLocation
+          className="vertical-nav-menu"
+          iconNamePrefix=""
+          classNameStateIcon="pe-7s-angle-down"
+        />
+        <h5 className="app-sidebar__heading">Forms</h5>
+        <MetisMenu
+          content={FormsNav}
+          onSelected={this.toggleMobileSidebar}
+          activeLinkFromLocation
+          className="vertical-nav-menu"
+          iconNamePrefix=""
+          classNameStateIcon="pe-7s-angle-down"
+        />
+        <h5 className="app-sidebar__heading">Charts</h5>
+        <MetisMenu
+          content={ChartsNav}
+          onSelected={this.toggleMobileSidebar}
+          activeLinkFromLocation
+          className="vertical-nav-menu"
+          iconNamePrefix=""
+          classNameStateIcon="pe-7s-angle-down"
+        /> */}
 
-        <h5 className="app-sidebar__heading">Menu</h5>
+        {/* <h5 className="app-sidebar__heading">Menu</h5> */}
         <MetisMenu
           content={EmpleadosNav}
+          onSelected={this.toggleMobileSidebar}
+          activeLinkFromLocation
+          className="vertical-nav-menu"
+          iconNamePrefix=""
+          classNameStateIcon="pe-7s-angle-down"
+        />
+
+        <MetisMenu
+          content={PuestosNav}
           onSelected={this.toggleMobileSidebar}
           activeLinkFromLocation
           className="vertical-nav-menu"
@@ -58,4 +103,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setEnableMobileMenu: (enable) => dispatch(setEnableMobileMenu(enable)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Nav));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Nav));

@@ -3,29 +3,29 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
-  createEmpleado,
-  getEmpleadoById,
-  updateEmpleado,
-} from "../../../services/empleadosService";
+  createPuesto,
+  getPuestoById,
+  updatePuesto,
+} from "../../../services/puestosService";
 import Loader from "react-loaders";
 
-import EmpleadosForm from "./EmpleadosForm";
+import PuestosForm from "./PuestosForm";
 // import PageTitle from "../../../Layout/AppMain/PageTitle";
 
-const EmpleadosCrearActualizar = () => {
+const PuestosCrearActualizar = () => {
   const [isUpdate, setIsUpdate] = useState(false);
-  const [empleado, setEmpleado] = useState(null);
+  const [puesto, setPuesto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loadingReadData, setLoadingReadData] = useState(false);
   // get id from url
   const { id } = useParams();
 
-  const getEmpleadoUpdate = async (empleado) => {
+  const getPuestoUpdate = async (puesto) => {
     setLoadingReadData(true);
     console.log("id3", id);
     setIsUpdate(true);
-    const empleadoData = await getEmpleadoById(empleado);
-    setEmpleado(empleadoData);
+    const puestoData = await getPuestoById(puesto);
+    setPuesto(puestoData);
     setLoadingReadData(false);
   };
 
@@ -33,14 +33,16 @@ const EmpleadosCrearActualizar = () => {
     console.log("id", id);
     if (id) {
       console.log("id2", id);
-      getEmpleadoUpdate(id);
+      getPuestoUpdate(id);
     }
 
     return () => {
       setIsUpdate(false);
-      setEmpleado({});
+      setPuesto({});
     };
   }, [id]);
+
+  console.log("emp", puesto);
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -48,10 +50,11 @@ const EmpleadosCrearActualizar = () => {
     // same shape as initial values
     if (isUpdate) {
       console.log("is Udpate", id);
-      await updateEmpleado(id, data);
+      await updatePuesto(id, data);
       setLoading(false);
     } else {
-      await createEmpleado(data);
+      console.log("create");
+      createPuesto(data);
       setLoading(false);
     }
   };
@@ -69,10 +72,10 @@ const EmpleadosCrearActualizar = () => {
           <Loader type="ball-pulse" />
         </div>
       ) : (
-        <EmpleadosForm
+        <PuestosForm
           onSubmit={onSubmit}
           isUpdate={isUpdate}
-          initialValues={empleado ? empleado : {}}
+          initialValues={puesto ? puesto : {}}
           loading={loading}
         />
       )}
@@ -80,4 +83,4 @@ const EmpleadosCrearActualizar = () => {
   );
 };
 
-export default EmpleadosCrearActualizar;
+export default PuestosCrearActualizar;
