@@ -9,7 +9,6 @@ import InputSelectValidation from "../../Components/InputValidation/InputSelectV
 import {
   departamentosOptions,
   municipiosOptions,
-  puestosOption,
 } from "../../../utils/constantes";
 import InputAsyncSelectValidation from "../../Components/InputValidation/InputAsyncSelectValidation";
 
@@ -17,9 +16,16 @@ const SignupSchema = Yup.object().shape({
   primer_nombre: Yup.string().required("Este campo es requerido"),
   primer_apellido: Yup.string().required("Este campo es requerido"),
   fecha_nacimiento: Yup.date().required("Este campo es requerido"),
-  dpi: Yup.number().required("Este campo es requerido"),
-  nit: Yup.number().required("Este campo es requerido"),
-  cantidad_hijos: Yup.number().required("Este campo es requerido"),
+  dpi: Yup.number()
+    .required("Este campo es requerido")
+    .min(0),
+  nit: Yup.number()
+    .required("Este campo es requerido")
+    .min(0),
+  cantidad_hijos: Yup.number()
+    .required("Este campo es requerido")
+    .min(0),
+  salario: Yup.number().min(0),
   correo: Yup.string()
     .email("Invalid email")
     .required("Este campo es requerido"),
@@ -30,22 +36,7 @@ const SignupSchema = Yup.object().shape({
 const EmpleadosForm = ({
   onSubmit,
   isUpdate = false,
-  initialValues = {
-    primer_nombre: "",
-    segundo_nombre: "",
-    primer_apellido: "",
-    segundo_apellido: "",
-    direccion: "",
-    fecha_nacimiento: "",
-    dpi: "",
-    nit: "",
-    correo: "",
-    cantidad_hijos: "",
-    departamento: "",
-    municipio: "",
-    salario: "",
-    puestos: "",
-  },
+  initialValues,
   loading = false,
 }) => {
   // console.log("initialValues", initialValues);
@@ -142,6 +133,7 @@ const EmpleadosForm = ({
                 key_name="cantidad_hijos"
                 placeholder="Cantidad de Hijos"
                 type="number"
+                minValue={"0"}
               />
 
               <InputValidation
@@ -189,6 +181,7 @@ const EmpleadosForm = ({
                 key_name="salario"
                 placeholder="Salario"
                 type="number"
+                minValue={"0"}
               />
 
               <InputAsyncSelectValidation

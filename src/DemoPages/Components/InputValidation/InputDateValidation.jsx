@@ -3,12 +3,16 @@ import React from "react";
 import DatePicker from "react-datepicker";
 
 const DatePickerField = ({ name, value, className, onChange }) => {
+  const fecha = new Date(value);
+  fecha.setMinutes(fecha.getMinutes() + fecha.getTimezoneOffset());
+  console.log(fecha);
+
   return (
     <DatePicker
       className={className}
       dateFormat="dd/MM/yyyy"
       placeholderText="dd/mm/yyyy"
-      selected={(value && new Date(value)) || null}
+      selected={(value && fecha) || null}
       onChange={(val) => {
         onChange(name, val);
       }}

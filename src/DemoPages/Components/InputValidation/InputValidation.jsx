@@ -8,6 +8,7 @@ const InputValidation = ({
   key_name,
   placeholder,
   type = "text",
+  minValue = false,
 }) => {
   const error = errors[key_name] && touched[key_name];
   return (
@@ -19,6 +20,7 @@ const InputValidation = ({
         className={`form-control ${error ? "border border-danger" : ""}`}
         value={value}
         type={type}
+        min={minValue ? minValue : null}
       />
       {error && <div className="text-danger">{errors[key_name]}</div>}
     </div>

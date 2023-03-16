@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   createEmpleado,
   getEmpleadoById,
@@ -19,6 +19,7 @@ const EmpleadosCrearActualizar = () => {
   const [loadingReadData, setLoadingReadData] = useState(false);
   // get id from url
   const { id } = useParams();
+  const history = useHistory();
 
   const getEmpleadoUpdate = async (empleado) => {
     setLoadingReadData(true);
@@ -48,10 +49,18 @@ const EmpleadosCrearActualizar = () => {
     // same shape as initial values
     if (isUpdate) {
       console.log("is Udpate", id);
-      await updateEmpleado(id, data);
+      const data_created = await updateEmpleado(id, data);
+
+      if (data_created) {
+        history.push("/empleados/listado");
+      }
       setLoading(false);
     } else {
-      await createEmpleado(data);
+      const data_updated = await createEmpleado(data);
+
+      if (data_updated) {
+        history.push("/empleados/listado");
+      }
       setLoading(false);
     }
   };
@@ -72,7 +81,26 @@ const EmpleadosCrearActualizar = () => {
         <EmpleadosForm
           onSubmit={onSubmit}
           isUpdate={isUpdate}
-          initialValues={empleado ? empleado : {}}
+          initialValues={
+            empleado
+              ? empleado
+              : {
+                  primer_nombre: "",
+                  segundo_nombre: "",
+                  primer_apellido: "",
+                  segundo_apellido: "",
+                  direccion: "",
+                  fecha_nacimiento: "",
+                  dpi: "",
+                  nit: "",
+                  correo: "",
+                  cantidad_hijos: "",
+                  departamento: "",
+                  municipio: "",
+                  salario: "",
+                  puestos: "",
+                }
+          }
           loading={loading}
         />
       )}

@@ -9,6 +9,8 @@ import {
   getEmpleados,
 } from "../../../services/empleadosService";
 import SweetAlert from "sweetalert-react";
+import { formatQTZ } from "../../../utils/currency";
+import moment from "moment";
 // import PageTitle from "../../../Layout/AppMain/PageTitle";
 
 const EmpleadosListado = () => {
@@ -22,8 +24,21 @@ const EmpleadosListado = () => {
         },
         {
           Header: "Primer Apellido",
-          id: "primer_apellido",
           accessor: "primer_apellido",
+        },
+        {
+          Header: "Edad",
+          accessor: "fecha_nacimiento",
+          // calcular la edad segun la fecha de nacimiento y la fecha actual usando moment
+          Cell: ({ value }) => {
+            const edad = moment().diff(value, "years");
+            return edad;
+          },
+        },
+        {
+          Header: "Salario",
+          accessor: "salario",
+          Cell: ({ value }) => formatQTZ(value),
         },
         // action buttons
         {

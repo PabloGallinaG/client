@@ -18,7 +18,10 @@ export const getEmpleadoById = async (id) => {
   try {
     const res = await axios.get(`http://localhost:3001/api/empleados/${id}`);
 
-    const { municipio, departamento } = res.data;
+    const { municipio, departamento, fecha_nacimiento } = res.data;
+
+    console.log("aaaaaaaaaaaaaaaa", fecha_nacimiento);
+    console.log("moment format", moment(fecha_nacimiento).format("DD-MM-YYYY"));
     const departamento_index = departamento - 1;
     const data_parse = {
       ...res.data,
@@ -26,6 +29,7 @@ export const getEmpleadoById = async (id) => {
         (_municipio) => _municipio.id === municipio
       ),
       departamento: departamentosOptions[departamento_index],
+      // fecha_nacimiento: moment(fecha_nacimiento).format("DD-MM-YYYY"),
       // puestos: puesto ? JSON.parse(puesto) : puesto,
     };
 
@@ -41,6 +45,8 @@ export const getEmpleadoById = async (id) => {
 // create categoriaProducto
 export const createEmpleado = async (data) => {
   const { municipio, departamento, fecha_nacimiento, puestos } = data;
+  console.log("fecha nacimiento", fecha_nacimiento);
+  console.log("fecha parse", moment(fecha_nacimiento).format("YYYY-MM-DD"));
   try {
     const res = await axios.post("http://localhost:3001/api/empleados", {
       ...data,
@@ -72,6 +78,11 @@ export const deleteEmpleado = async (id) => {
 // patch categoriaProducto
 export const updateEmpleado = async (id, data) => {
   const { municipio, departamento, fecha_nacimiento, puestos } = data;
+  console.log("fecha nacimiento", fecha_nacimiento);
+  console.log(
+    "fecha parse",
+    moment(fecha_nacimiento).format("YYYY-MM-DDT00:00:00")
+  );
   try {
     const res = await axios.put(`http://localhost:3001/api/empleados/${id}`, {
       ...data,

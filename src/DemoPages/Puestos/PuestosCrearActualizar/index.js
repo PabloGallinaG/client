@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {
   createPuesto,
   getPuestoById,
@@ -19,6 +19,7 @@ const PuestosCrearActualizar = () => {
   const [loadingReadData, setLoadingReadData] = useState(false);
   // get id from url
   const { id } = useParams();
+  const history = useHistory();
 
   const getPuestoUpdate = async (puesto) => {
     setLoadingReadData(true);
@@ -50,11 +51,19 @@ const PuestosCrearActualizar = () => {
     // same shape as initial values
     if (isUpdate) {
       console.log("is Udpate", id);
-      await updatePuesto(id, data);
+      const puesto_udated = await updatePuesto(id, data);
+
+      if (puesto_udated) {
+        history.push("/puestos/listado");
+      }
       setLoading(false);
     } else {
       console.log("create");
-      createPuesto(data);
+      const puesto_crated = await createPuesto(data);
+
+      if (puesto_crated) {
+        history.push("/puestos/listado");
+      }
       setLoading(false);
     }
   };
