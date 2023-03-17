@@ -7,5 +7,5 @@ export const formatQTZ = (value) => {
     maximumFractionDigits: 2,
   });
 
-  return formatter.format(value); //$2,500.00
+  return formatter.format(value); //Q2,500.00
 };

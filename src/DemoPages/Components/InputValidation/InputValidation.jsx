@@ -21,6 +21,7 @@ const InputValidation = ({
         value={value}
         type={type}
         min={minValue ? minValue : null}
+        step="any"
       />
       {error && <div className="text-danger">{errors[key_name]}</div>}
     </div>
